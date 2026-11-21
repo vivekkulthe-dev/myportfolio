@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { contactData } from '@/lib/siteData';
-<!-- Testing GitHub PR workflow -->
+{/*  Testing GitHub PR workflow */}
 export default function Contact() {
     const [formData, setFormData] = useState({
         name: '',
