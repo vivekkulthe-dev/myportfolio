@@ -147,3 +147,8 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Ignore DS Store Files Created by MACOS
+**/.DS_Store
+.DS_Store
+public/.DS_Store
