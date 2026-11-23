@@ -1,0 +1,45 @@
+name: Website CI Check
+
+# 1. TRIGGER: Run automatically on every PR targeting main
+on:
+  pull_request:
+    branches: [ main ]
+
+# 2. JOB: Spin up a free Ubuntu Linux runner
+jobs:
+  validate-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step A: Download your PR branch code into the runner
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      # Step B: Verify no accidental secret files (.env) were committed
+      - name: Security Check - Block .env files
+        run: |
+          if find . -name ".env*" | grep -q .; then
+            echo "ERROR: .env file detected in repository!"
+            exit 1
+          fi
+          echo "Passed: No .env secret files found."
+
+      # Step C: Verify no unresolved Git merge conflict markers exist
+      - name: Quality Check - Scan for merge conflict markers
+        run: |
+          if grep -rn "<<<<<<< HEAD" . --exclude-dir=.git --exclude-dir=.github; then
+            echo "ERROR: Unresolved merge conflict markers found!"
+            exit 1
+          fi
+          echo "Passed: No unresolved conflict markers."
+
+      # Step D: Run Node/Website build if package.json exists
+      - name: Build Verification
+        run: |
+          if [ -f "package.json" ]; then
+            npm ci
+            npm run build
+          else
+            echo "Static site detected — checking HTML/asset files..."
+            ls -la
+          fi
