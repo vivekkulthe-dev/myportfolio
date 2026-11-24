@@ -1,0 +1,22 @@
+# Cline Ignore File
+# This file specifies patterns to ignore when scanning the project for code analysis
+# These exclusions help prevent unnecessary processing and potential security issues
+
+# Python virtual environments (both venv and .venv)
+.venv/
+venv/
+
+# Python cache files
+__pycache__/
+
+# Git repository (avoid scanning git metadata)
+.git/
+
+# Python compiled files
+*.pyc
+
+# Environment variables file (sensitive data)
+.env
+
+# Configuration directory (may contain sensitive info)
+config/

@@ -1,0 +1,4 @@
+# GitHub MCP Rules
+- Default GitHub owner/username: `vivekkulthe-dev`
+- Never guess or invent placeholder repository or organization names (such as `octocat` or `my-org`).
+- When asked about "my repository" or "this repo", first inspect `.git/config` in the current workspace (or call `get_me` and `search_repositories`) to confirm the exact `owner` and `repo` name before calling GitHub MCP tools.
